@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<installer-gui-script minSpecVersion="2">
+    <title>Russian Phonetic Max</title>
+    <organization>org.sil.ukelele</organization>
+
+    <welcome    file="welcome.html" />
+    <readme     file="readme.html" />
+    <conclusion file="conclusion.html" />
+
+    <options
+        customize="never"
+        rootVolumeOnly="true"
+        hostArchitectures="arm64,x86_64"
+        require-scripts="false"
+    />
+
+    <volume-check>
+        <allowed-os-versions>
+            <os-version min="12.0" />
+        </allowed-os-versions>
+    </volume-check>
+
+    <choices-outline>
+        <line choice="default">
+            <line choice="org.sil.ukelele.keyboardlayout.russian-phonetic-max" />
+        </line>
+    </choices-outline>
+
+    <choice
+        id="default"
+        title="Russian Phonetic Max" />
+
+    <choice
+        id="org.sil.ukelele.keyboardlayout.russian-phonetic-max"
+        visible="false">
+        <pkg-ref id="org.sil.ukelele.keyboardlayout.russian-phonetic-max" />
+    </choice>
+
+    <pkg-ref
+        id="org.sil.ukelele.keyboardlayout.russian-phonetic-max"
+        version="1.1"
+        onConclusion="none">russian-phonetic-max.pkg</pkg-ref>
+
+</installer-gui-script>

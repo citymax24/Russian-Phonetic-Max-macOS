@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<style>
+  body { font-family: -apple-system, Helvetica Neue, sans-serif; font-size: 13px; line-height: 1.5; color: #333; }
+  h1 { font-size: 16px; margin-bottom: 12px; }
+  table { border-collapse: collapse; width: 100%; margin: 10px 0; }
+  th, td { text-align: left; padding: 5px 10px; border-bottom: 1px solid #ddd; font-size: 12px; }
+  th { background: #f5f5f5; }
+  .path { font-family: Menlo, monospace; font-size: 11px; background: #f0f0f0; padding: 2px 5px; border-radius: 3px; }
+</style>
+</head>
+<body>
+
+<h1>Was wird installiert?</h1>
+
+<table>
+<tr>
+  <th>Datei</th>
+  <th>Ziel</th>
+</tr>
+<tr>
+  <td>Russian-Phonetic-Max.bundle</td>
+  <td><span class="path">/Library/Keyboard Layouts/</span></td>
+</tr>
+<tr>
+  <td>Russian-Phonetic-Max.keylayout</td>
+  <td><span class="path">/Library/Keyboard Layouts/</span></td>
+</tr>
+</table>
+
+<p>Zus&auml;tzlich wird eine Kopie nach
+<span class="path">~/Library/Keyboard Layouts/</span>
+gelegt (f&uuml;r maximale Kompatibilit&auml;t mit macOS 26).</p>
+
+<h1>Was passiert automatisch?</h1>
+<ul>
+  <li>Alte Versionen (Russian-MB, Russian-Phonetic-Max) werden entfernt</li>
+  <li>Quarant&auml;ne-Attribute werden gel&ouml;scht</li>
+  <li>Keyboard-Caches werden bereinigt</li>
+  <li>Das Layout wird sofort im System registriert (TIS)</li>
+</ul>
+
+<h1>Voraussetzungen</h1>
+<ul>
+  <li>macOS 12 (Monterey) oder neuer</li>
+  <li>Administrator-Passwort (wird beim Installieren abgefragt)</li>
+</ul>
+
+</body>
+</html>
