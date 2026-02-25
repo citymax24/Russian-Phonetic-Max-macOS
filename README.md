@@ -14,6 +14,19 @@ Type Russian intuitively on your German keyboard — every key is where you'd ph
 - **Apple Silicon + Intel** (arm64 & x86_64)
 - **macOS 12 Monterey** or later
 
+## Compatibility
+
+| macOS Version | Status |
+|---|---|
+| macOS 12 Monterey | Supported (minimum) |
+| macOS 13 Ventura | Supported |
+| macOS 14 Sonoma | Supported |
+| macOS 15 Sequoia | Supported |
+| macOS 26 Tahoe | Supported |
+
+Works on **Apple Silicon** (M1/M2/M3/M4) and **Intel** Macs.
+Designed for **ISO keyboards** (German/European layout with the extra key left of Shift).
+
 ## QWERTZ Key Mapping
 
 | Key | Output | Shifted |
