@@ -14,7 +14,7 @@ OUTPUT_DIR="$SCRIPT_DIR/output"
 BUNDLE_NAME="Russian-Phonetic-Max.bundle"
 KEYLAYOUT_NAME="Russian-Phonetic-Max.keylayout"
 PKG_IDENTIFIER="org.sil.ukelele.keyboardlayout.russian-phonetic-max"
-PKG_VERSION="1.1"
+PKG_VERSION="1.2"
 FINAL_PKG_NAME="Russian-Phonetic-Max-Installer.pkg"
 
 echo ""
