@@ -38,7 +38,7 @@
 
     <pkg-ref
         id="org.sil.ukelele.keyboardlayout.russian-phonetic-max"
-        version="1.1"
+        version="1.2"
         onConclusion="none">russian-phonetic-max.pkg</pkg-ref>
 
 </installer-gui-script>

@@ -53,15 +53,12 @@ PAYLOAD_KB="$BUILD_DIR/payload/Library/Keyboard Layouts"
 
 # Copy bundle (COPYFILE_DISABLE prevents AppleDouble ._* files in archives)
 COPYFILE_DISABLE=1 cp -R "$BUNDLE_SRC" "$PAYLOAD_KB/$BUNDLE_NAME"
-# Copy bare keylayout
-COPYFILE_DISABLE=1 cp "$KEYLAYOUT_SRC" "$PAYLOAD_KB/$KEYLAYOUT_NAME"
 
 # Set correct permissions in payload
 chmod 755 "$PAYLOAD_KB/$BUNDLE_NAME"
 chmod 755 "$PAYLOAD_KB/$BUNDLE_NAME/Contents"
 chmod 755 "$PAYLOAD_KB/$BUNDLE_NAME/Contents/Resources"
 find "$PAYLOAD_KB/$BUNDLE_NAME" -type f -exec chmod 644 {} +
-chmod 644 "$PAYLOAD_KB/$KEYLAYOUT_NAME"
 
 # Remove quarantine attributes, .DS_Store, and AppleDouble (._*) files
 xattr -cr "$PAYLOAD_KB" 2>/dev/null || true
@@ -69,7 +66,7 @@ find "$PAYLOAD_KB" -name ".DS_Store" -delete 2>/dev/null || true
 find "$PAYLOAD_KB" -name "._*" -delete 2>/dev/null || true
 dot_clean "$PAYLOAD_KB" 2>/dev/null || true
 
-echo "   Bundle + bare .keylayout bereit."
+echo "   Bundle bereit."
 
 # ── [4/6] Build component package ────────────────────────────────────────────
 echo "[4/6] Component Package erstellen (pkgbuild)..."

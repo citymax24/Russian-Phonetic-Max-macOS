@@ -52,8 +52,8 @@ osascript -e "do shell script \"
 \" with administrator privileges"
 echo "   Erledigt."
 
-# ── [4/7] Install bundle + bare .keylayout + permissions + remove quarantine ──
-echo "[4/7] Bundle und bare keylayout system-weit installieren..."
+# ── [4/7] Install bundle + permissions + remove quarantine ───────────────────
+echo "[4/7] Bundle system-weit installieren..."
 osascript -e "do shell script \"
     cp -R '$BUNDLE_SRC' '$SYS_KB_DIR/'
     chmod 755 '$SYS_KB_DIR/$BUNDLE_NAME'
@@ -62,12 +62,9 @@ osascript -e "do shell script \"
     chmod 644 '$SYS_KB_DIR/$BUNDLE_NAME/Contents/Info.plist'
     chmod 644 '$SYS_KB_DIR/$BUNDLE_NAME/Contents/Resources/$KEYLAYOUT_NAME'
     xattr -cr '$SYS_KB_DIR/$BUNDLE_NAME'
-    cp '$KEYLAYOUT_SRC' '$SYS_KB_DIR/$KEYLAYOUT_NAME'
-    chmod 644 '$SYS_KB_DIR/$KEYLAYOUT_NAME'
-    xattr -cr '$SYS_KB_DIR/$KEYLAYOUT_NAME'
     echo done
 \" with administrator privileges"
-echo "   $BUNDLE_NAME + $KEYLAYOUT_NAME → $SYS_KB_DIR/ (Quarantaene entfernt)"
+echo "   $BUNDLE_NAME → $SYS_KB_DIR/ (Quarantaene entfernt)"
 
 # ── [5/7] Clear HIToolbox cache ───────────────────────────────────────────────
 echo "[5/7] HIToolbox-Cache leeren..."
@@ -84,22 +81,15 @@ echo "[6/7] com.apple.inputsources.plist bereinigen..."
     ~/Library/Preferences/com.apple.inputsources.plist 2>/dev/null || true
 echo "   Erledigt."
 
-# ── [7/7] Clear IntlDataCache + TIS live-register ────────────────────────────
-echo "[7/7] IntlDataCache leeren + TIS sofort registrieren..."
-find /var/folders -name "com.apple.IntlDataCache*" -user "$USER" -delete 2>/dev/null || true
-# Register the bare .keylayout file immediately so it appears in the current session
-swift -e "
-import Carbon
-let url = URL(fileURLWithPath: \"$SYS_KB_DIR/$KEYLAYOUT_NAME\")
-let s = TISRegisterInputSource(url as CFURL)
-print(\"TIS Register: \\(s == 0 ? \\\"OK\\\" : \\\"Error \\(s)\\\")\")" 2>/dev/null || true
+# ── [7/7] Clear IntlDataCache ────────────────────────────────────────────────
+echo "[7/7] IntlDataCache leeren..."
+osascript -e "do shell script \"find /var/folders -name 'com.apple.IntlDataCache*' -delete 2>/dev/null; echo done\" with administrator privileges" 2>/dev/null || true
 echo "   Erledigt."
 
 # ── Verification ──────────────────────────────────────────────────────────────
 echo ""
-INSTALLED="$SYS_KB_DIR/$KEYLAYOUT_NAME"
 INSTALLED_BUNDLE="$SYS_KB_DIR/$BUNDLE_NAME/Contents/Resources/$KEYLAYOUT_NAME"
-if [ -f "$INSTALLED" ] && [ -f "$INSTALLED_BUNDLE" ]; then
+if [ -f "$INSTALLED_BUNDLE" ]; then
     echo "Installierte Dateien vorhanden: JA  ✓"
 else
     echo "Installierte Datei vorhanden: NEIN  ✗  (Installation moeglicherweise fehlgeschlagen)"

@@ -24,13 +24,10 @@ echo "postinstall [1/8]: Permissions setzen..."
 chown -R root:wheel "$SYS_KB/$BUNDLE_NAME"           || true
 find "$SYS_KB/$BUNDLE_NAME" -type d -exec chmod 755 {} + || true
 find "$SYS_KB/$BUNDLE_NAME" -type f -exec chmod 644 {} + || true
-chown root:wheel "$SYS_KB/$KEYLAYOUT_NAME"            || true
-chmod 644 "$SYS_KB/$KEYLAYOUT_NAME"                    || true
 
 # ── [2] Remove quarantine ─────────────────────────────────────────────────────
 echo "postinstall [2/8]: Quarantaene entfernen..."
 xattr -cr "$SYS_KB/$BUNDLE_NAME"                      || true
-xattr -cr "$SYS_KB/$KEYLAYOUT_NAME"                   || true
 
 # ── [3] Remove old user-level layouts ─────────────────────────────────────────
 echo "postinstall [3/8]: Alte User-Layouts entfernen..."
@@ -47,11 +44,9 @@ echo "postinstall [4/8]: User-Kopie fuer macOS 26..."
 if [ -n "$CONSOLE_HOME" ] && [ "$USR_KB" != "$SYS_KB" ] && [ -n "$CONSOLE_USER" ]; then
     mkdir -p "$USR_KB"                                 || true
     cp -R "$SYS_KB/$BUNDLE_NAME" "$USR_KB/"           || true
-    cp "$SYS_KB/$KEYLAYOUT_NAME" "$USR_KB/"           || true
     # Fix ownership to real user
     CONSOLE_GID=$(id -g "$CONSOLE_USER" 2>/dev/null)   || CONSOLE_GID="staff"
     chown -R "$CONSOLE_USER:$CONSOLE_GID" "$USR_KB/$BUNDLE_NAME"    || true
-    chown "$CONSOLE_USER:$CONSOLE_GID" "$USR_KB/$KEYLAYOUT_NAME"    || true
 fi
 
 # ── [5] Clear HIToolbox cache ────────────────────────────────────────────────
@@ -74,21 +69,9 @@ fi
 echo "postinstall [7/8]: IntlDataCache leeren..."
 find /var/folders -name "com.apple.IntlDataCache*" -delete 2>/dev/null || true
 
-# ── [8] TIS live-register ────────────────────────────────────────────────────
-echo "postinstall [8/8]: TIS live-register..."
-swift -e "
-import Carbon
-let url = URL(fileURLWithPath: \"$SYS_KB/$KEYLAYOUT_NAME\")
-let s = TISRegisterInputSource(url as CFURL)
-print(\"TIS Register bare keylayout: \(s == 0 ? \"OK\" : \"Error \(s)\")\")
-" 2>/dev/null || true
-
-swift -e "
-import Carbon
-let url = URL(fileURLWithPath: \"$SYS_KB/$BUNDLE_NAME\")
-let s = TISRegisterInputSource(url as CFURL)
-print(\"TIS Register bundle: \(s == 0 ? \"OK\" : \"Error \(s)\")\")
-" 2>/dev/null || true
+# ── [8] Flush tipsd so macOS re-discovers the bundle ─────────────────────────
+echo "postinstall [8/8]: tipsd neu starten..."
+pkill -HUP tipsd 2>/dev/null || true
 
 echo "postinstall: Fertig."
 exit 0
