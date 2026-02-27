@@ -172,7 +172,7 @@
             <key code="3" output="Ф"/>
             <key code="4" output="Ч"/>
             <key code="5" output="Г"/>
-            <key code="6" output="З"/>
+            <key code="6" output="Ы"/>
             <key code="7" output="Х"/>
             <key code="8" output="Ц"/>
             <key code="9" output="В"/>
@@ -182,7 +182,7 @@
             <key code="13" output="Ш"/>
             <key code="14" output="Е"/>
             <key code="15" output="Р"/>
-            <key code="16" output="Ы"/>
+            <key code="16" output="З"/>
             <key code="17" output="Т"/>
             <key code="18" output="!"/>
             <key code="19" output="&#x0022;"/>
@@ -527,7 +527,7 @@
             <key code="3" output="ф"/>
             <key code="4" output="ч"/>
             <key code="5" output="г"/>
-            <key code="6" output="з"/>
+            <key code="6" output="ы"/>
             <key code="7" output="х"/>
             <key code="8" output="ц"/>
             <key code="9" output="в"/>
@@ -537,7 +537,7 @@
             <key code="13" output="ш"/>
             <key code="14" output="е"/>
             <key code="15" output="р"/>
-            <key code="16" output="ы"/>
+            <key code="16" output="з"/>
             <key code="17" output="т"/>
             <key code="18" output="1"/>
             <key code="19" output="2"/>
